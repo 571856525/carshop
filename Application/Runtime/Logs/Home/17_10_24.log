@@ -1,0 +1,17 @@
+[ 2017-10-24T19:19:23+08:00 ] ::1 /carshop/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.406669s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.034322s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.034383s ]
+INFO: [ view_parse ] --START--
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.000983s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.001052s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.047580s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.047617s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.075981s ]
+INFO: [ app_end ] --END-- [ RunTime:0.076034s ]
+

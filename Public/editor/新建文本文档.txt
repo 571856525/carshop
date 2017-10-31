@@ -1,0 +1,6 @@
+<script src="__PUBLIC__/editor/ueditor.config.js"></script>
+<script src="__PUBLIC__/editor/ueditor.all.min.js"></script>
+<script>
+    var editor=UE.getEditor('editor',{initialFrameWidth:1000,initialFrameHeight:300});
+    //editor为textarea的id;
+</script>

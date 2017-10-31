@@ -1,0 +1,12 @@
+[ 2017-10-28T19:01:19+08:00 ] 127.0.0.1 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000249s ]
+ERR: 无法加载模块:Favicon
+
+[ 2017-10-28T19:01:30+08:00 ] 127.0.0.1 /Public/Uploads/2017-10-24/59ef28df48f22.jpg
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000469s ]
+ERR: 无法加载模块:Public
+
