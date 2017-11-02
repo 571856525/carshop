@@ -28,11 +28,11 @@
                         <tbody><tr>
                             <th width="120"><i class="require-red">*</i>上级分类：</th>
                             <td>
-                                <select name="parentid" id="catid" class="required">
-                                    <option value="0">顶级栏目</option>
+                                  <select name="parentid" id="catid" class="required">
+                                      <option value="0">顶级栏目</option>
                                     <volist name="list" id="vo">
-                                    <option value="{$vo.id}">
-                                    <?php echo str_repeat('*',$vo['level']*2);?>{$vo.name}</option>
+                                       <option <if condition="$vo.id eq $content['id'] ">style="display:none"</if> value="{$vo.id}" >
+                                       <?php echo str_repeat('*',$vo['level']*2);?>{$vo.name}</option>
                                     </volist>
                                 </select>
                             </td>
@@ -40,33 +40,35 @@
                             <tr>
                                 <th><i class="require-red">*</i>栏目名称：</th>
                                 <td>
-                                    <input class="common-text required" id="title" name="name" size="50" value="" type="text">
+                                    <input class="common-text required" id="title" name="name" size="50" value="{$content.name}" type="text">
                                 </td>
                             </tr>
                             <tr>
                                 <th>关键词：</th>
-                                <td><input class="common-text" name="keywords" size="50" value="admin" type="text"></td>
+                                <td><input class="common-text" name="keywords" size="50" value="{$content.keywords}" type="text"></td>
                             </tr>
                             <tr>
                                 <th>描述：</th>
-                                <td><textarea name="des" class="common-textarea"  cols="30"  rows="5"></textarea></td>
+                                <td><textarea name="des" class="common-textarea"  cols="30"  rows="5">{$content.des}</textarea></td>
                             </tr>
                              <tr>
-                                <th>分类：</th>
+                                <th>类型：</th>
                                 <td>
-                                 <input class="common-text" name="type" size="50" checked="checked" value="0" type="radio">列表
-                                 <input class="common-text" name="type" size="50" value="1" type="radio">单页
-                                 <input class="common-text" name="type" size="50" value="2" type="radio">留言
-                                 <input class="common-text" name="type" size="50" value="3" type="radio">招聘
+                                 <input class="common-text" name="type" size="50" <if condition="$content.type eq 0 "> checked="checked" </if> value="0" type="radio">列表
+                                 <input class="common-text" name="type" size="50" <if condition="$content.type eq 1 "> checked="checked" </if> value="1" type="radio">单页
+                                 <input class="common-text" name="type" size="50" <if condition="$content.type eq 2 "> checked="checked" </if> value="2" type="radio">留言
+                                 <input class="common-text" name="type" size="50" <if condition="$content.type eq 3 "> checked="checked" </if> value="3" type="radio">招聘
                                  </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>缩略图：</th>
-                                <td><input name="pic" id="" type="file"></td>
+                                <td><input name="pic"  id="" type="file">
+                                    <img src="__ROOT__/{$vo.pic}" alt="">
+                                </td>
                             </tr>
-                            <tr>
+                            <tr> <input type="hidden" value="{$content.id}" name="id">
                                 <th>内容：</th>
-                                <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                                <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10">{$content.content}</textarea></td>
                             </tr>
                             <tr>
                                 <th></th>

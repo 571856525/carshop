@@ -9,7 +9,7 @@ class CateModel extends Model {
     );
     public function catetree()
     {
-    	$data=$this->select();
+    	$data=$this->order('sort asc')->select();
     	return $this->resort($data);
     }
     public function resort($data,$parentid=0,$level=0)

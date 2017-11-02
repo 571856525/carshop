@@ -19,17 +19,17 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin/design/">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="__CONTROLLER__/lst">栏目管理</a><span class="crumb-step">&gt;</span><span>新增栏目</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin/design/">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="__CONTROLLER__/lst">文章管理</a><span class="crumb-step">&gt;</span><span>新增文章</span></div>
         </div>
         <div class="result-wrap">
             <div class="result-content">
                 <form action="" method="post" id="myform" name="myform" enctype="multipart/form-data">
                     <table class="insert-tab" width="100%">
                         <tbody><tr>
-                            <th width="120"><i class="require-red">*</i>上级分类：</th>
+                            <th width="120"><i class="require-red">*</i>文章分类：</th>
                             <td>
-                                <select name="parentid" id="catid" class="required">
-                                    <option value="0">顶级栏目</option>
+                                <select name="cateid" id="catid" class="required">
+                                    <option value="">--请选择--</option>
                                     <volist name="list" id="vo">
                                     <option value="{$vo.id}">
                                     <?php echo str_repeat('*',$vo['level']*2);?>{$vo.name}</option>
@@ -38,9 +38,15 @@
                             </td>
                         </tr>
                             <tr>
-                                <th><i class="require-red">*</i>栏目名称：</th>
+                                <th><i class="require-red">*</i>文章标题：</th>
                                 <td>
-                                    <input class="common-text required" id="title" name="name" size="50" value="" type="text">
+                                    <input class="common-text required" id="title" name="title" size="50" value="" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>文章作者：</th>
+                                <td>
+                                    <input class="common-text required" id="author" name="author" size="50" value="" type="text">
                                 </td>
                             </tr>
                             <tr>
@@ -52,12 +58,10 @@
                                 <td><textarea name="des" class="common-textarea"  cols="30"  rows="5"></textarea></td>
                             </tr>
                              <tr>
-                                <th>分类：</th>
+                                <th>是否推荐：</th>
                                 <td>
-                                 <input class="common-text" name="type" size="50" checked="checked" value="0" type="radio">列表
-                                 <input class="common-text" name="type" size="50" value="1" type="radio">单页
-                                 <input class="common-text" name="type" size="50" value="2" type="radio">留言
-                                 <input class="common-text" name="type" size="50" value="3" type="radio">招聘
+                                 <input class="common-text" name="rem" size="50"  value="1" type="checkbox">
+                                 
                                  </td>
                             </tr>
                             <tr>

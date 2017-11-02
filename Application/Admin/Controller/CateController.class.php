@@ -6,7 +6,7 @@ class CateController extends Controller {
     {
     	$cate=D('cate');
         $cates=$cate->catetree();
-        $this->assign('cates',$cates);
+		$this->assign('cates',$cates);
         $this->display();
     }
     public function add()
@@ -137,5 +137,16 @@ class CateController extends Controller {
     		$this->error('批量删除失败');
     	}
     	
+    }
+    //更新排序
+    public function cateSort()
+    {
+    	if(IS_POST){
+    		$cate=D('cate');
+    		foreach ($_POST as $id => $sort) {
+    			$cate->where("id=$id")->setField('sort',$sort);
+    		}
+    	}
+    	$this->success("更新排序成功",U('lst'));
     }
 }
