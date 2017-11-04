@@ -91,38 +91,34 @@
                     <div class="result-list">
                         <a href="/index.php/Admin/Article/add" class="btn btn-primary btn2"><i class="icon-font"></i>新增文章</a>
                         <a id="batchDel" ><i class="icon-font" ></i><input formaction="/index.php/Admin/Article/bdel"  class="btn btn-primary btn2" type="submit" value="批量删除"></a>
-                        <a id="batchDel" ><i class="icon-font" ></i><input formaction="/index.php/Admin/Article/cateSort"  class="btn btn-primary btn2" type="submit" value="更新排序"></a>
                     </div>
                 </div>
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>
                             <th class="tc" width="5%"><input class="allChoose" id="check"  type="checkbox" ></th>
-                            <th>排序</th>
                             <th>ID</th>
                             <th>文章标题</th>
-                            <th>文章类型</th>
+                            <th>是否推荐</th>
                             <th>缩略图</th>
+                            <th>所属栏目</th>
                             <th>操作</th>
                         </tr>
                         <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
                                 <td class="tc"><input name="ids[]" class='check' value="<?php echo ($vo["id"]); ?>" type="checkbox"></td>
-                                <td>
-                                    <input class="common-input sort-input" name="<?php echo ($vo["id"]); ?>" value="<?php echo ($vo["sort"]); ?>" type="text">
-                                </td>
                                 <td><?php echo ($vo["id"]); ?></td>
                                 <td title="发哥经典"><a target="_blank" href="#" title="发哥经典"><?php echo ($vo["title"]); ?></a>
                                 </td>
                                 <td>
-                                <?php if($vo['type'] == 0): ?>列表<?php endif; ?>
-                                <?php if($vo['type'] == 1): ?>单页<?php endif; ?>
-                                <?php if($vo['type'] == 3): ?>留言<?php endif; ?>
-                                <?php if($vo['type'] == 4): ?>招聘<?php endif; ?>
+                                <?php if($vo['rem'] == 1): ?>推荐
+                                <?php else: ?>
+                                未推荐<?php endif; ?>
                                 </td>
                                 <td>
                                 <?php if($vo['pic'] != ''): ?><img src="/<?php echo ($vo["pic"]); ?>" alt="" width="60px"></td>
                                 <?php else: ?>
                                 暂无缩略图<?php endif; ?>
+                                <td><?php echo ($vo["name"]); ?></td>
                                 <td>
                                     <a class="link-update" href="/index.php/Admin/Article/edit/id/<?php echo ($vo["id"]); ?>">修改</a>
                                     <a class="link-del" href="/index.php/Admin/Article/del/id/<?php echo ($vo["id"]); ?>" onclick="return confirm('确定要删除文章吗？')">删除</a>
