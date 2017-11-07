@@ -17,7 +17,7 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">栏目管理</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">链接管理</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
@@ -43,7 +43,7 @@
             <form name="myform"  id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="__CONTROLLER__/add" class="btn btn-primary btn2"><i class="icon-font"></i>新增栏目</a>
+                        <a href="__CONTROLLER__/add" class="btn btn-primary btn2"><i class="icon-font"></i>新增链接</a>
                         <a id="batchDel" ><i class="icon-font" ></i><input formaction="__CONTROLLER__/bdel"  class="btn btn-primary btn2" type="submit" value="批量删除"></a>
                         <a id="batchDel" ><i class="icon-font" ></i><input formaction="__CONTROLLER__/cateSort"  class="btn btn-primary btn2" type="submit" value="更新排序"></a>
                     </div>
@@ -54,48 +54,27 @@
                             <th class="tc" width="5%"><input class="allChoose" id="check"  type="checkbox" ></th>
                             <th>排序</th>
                             <th>ID</th>
-                            <th>栏目名称</th>
-                            <th>栏目类型</th>
-                            <th>缩略图</th>
+                            <th>链接名称</th>
+                            <th>链接地址</th>
                             <th>操作</th>
                         </tr>
-                        <volist name="cates" id='vo'>
+                        <volist name="link" id='vo'>
                             <tr>
                                 <td class="tc"><input name="ids[]" class='check' value="{$vo.id}" type="checkbox"></td>
                                 <td>
                                     <input class="common-input sort-input" name="{$vo.id}" value="{$vo.sort}" type="text">
                                 </td>
                                 <td>{$vo.id}</td>
-                                <td title="发哥经典"><a target="_blank" href="#" title="发哥经典"><?php echo str_repeat('-',$vo['level']*2);?>{$vo.name}</a>
-                                </td>
-                                <td>
-                                <if condition="$vo['type'] eq 1">
-                                列表
-                                </if>
-                                <if condition="$vo['type'] eq 2">
-                                单页
-                                </if>
-                                <if condition="$vo['type'] eq 3">
-                                留言
-                                </if>
-                                <if condition="$vo['type'] eq 4">
-                                招聘
-                                </if>
-                                </td>
-                                <td>
-                                <if condition="$vo['pic'] neq ''">
-                                <img src="__ROOT__/{$vo.pic}" alt="" width="60px"></td>
-                                <else/>
-                                暂无缩略图
-                                </if>
+                                <td>{$vo.title}</td>
+                                <td>{$vo.url}</td>
                                 <td>
                                     <a class="link-update" href="__CONTROLLER__/edit/id/{$vo.id}">修改</a>
-                                    <a class="link-del" href="__CONTROLLER__/del/id/{$vo.id}" onclick="return confirm('确定要删除吗？')">删除</a>
+                                    <a class="link-del" href="__CONTROLLER__/del/id/{$vo.id}" onclick="return confirm('确定要删除该链接吗？')">删除</a>
                                 </td>
                             </tr>
                         </volist>
                     </table>
-                    
+                    <div class="list-page">{$page}</div>
                 </div>
             </form>
         </div>

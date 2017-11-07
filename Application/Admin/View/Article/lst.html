@@ -21,18 +21,22 @@
         </div>
         <div class="search-wrap">
             <div class="search-content">
-                <form action="/jscss/admin/design/index" method="post">
+                <form action="" method="post" name="myform">
                     <table class="search-tab">
                         <tr>
                             <th width="120">选择分类:</th>
                             <td>
-                                <select name="search-sort" id="">
-                                    <option value="">全部</option>
-                                    <option value="19">精品界面</option><option value="20">推荐界面</option>
+                                <select name="cateid" id="catid" class="required">
+                                    <option value="">--请选择--</option>
+                                    <volist name="cates" id="vo">
+                                       <option value="{$vo.id}"<if condition="$vo.type neq 1">style="display:none;"</if> <if condition="$vo.id eq $cateid">selected</if> <if condition="$vo.id eq $cateid">selected</if>>
+                                           <?php echo str_repeat('*',$vo['level']*2);?>{$vo.name}
+                                       </option>
+                                    </volist>
                                 </select>
                             </td>
                             <th width="70">关键字:</th>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"></td>
+                            <td><input class="common-text" placeholder="关键字" name="kw" value="{$kw}" id="" type="text"></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="查询" type="submit"></td>
                         </tr>
                     </table>
@@ -40,7 +44,7 @@
             </div>
         </div>
         <div class="result-wrap">
-            <form name="myform"  id="myform" method="post">
+            <form   id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
                         <a href="__CONTROLLER__/add" class="btn btn-primary btn2"><i class="icon-font"></i>新增文章</a>

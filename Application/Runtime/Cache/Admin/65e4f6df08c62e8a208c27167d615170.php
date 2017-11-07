@@ -43,7 +43,7 @@
                         <li><a href="design.html"><i class="icon-font">&#xe006;</i>分类管理</a></li>
                         <li><a href="design.html"><i class="icon-font">&#xe004;</i>留言管理</a></li>
                         <li><a href="design.html"><i class="icon-font">&#xe012;</i>评论管理</a></li>
-                        <li><a href="design.html"><i class="icon-font">&#xe052;</i>友情链接</a></li>
+                        <li><a href="/index.php/Admin/Link/lst"><i class="icon-font">&#xe052;</i>友情链接</a></li>
                         <li><a href="design.html"><i class="icon-font">&#xe033;</i>广告管理</a></li>
                     </ul>
                 </li>
@@ -63,24 +63,22 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">文章管理</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">链接管理</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
-                <form action="" method="post" name="myform">
+                <form action="/jscss/admin/design/index" method="post">
                     <table class="search-tab">
                         <tr>
                             <th width="120">选择分类:</th>
                             <td>
-                                <select name="cateid" id="catid" class="required">
-                                    <option value="">--请选择--</option>
-                                    <?php if(is_array($cates)): $i = 0; $__LIST__ = $cates;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["id"]); ?>"<?php if($vo["type"] != 1): ?>style="display:none;"<?php endif; ?> <?php if($vo["id"] == $cateid): ?>selected<?php endif; ?> <?php if($vo["id"] == $cateid): ?>selected<?php endif; ?>>
-                                           <?php echo str_repeat('*',$vo['level']*2); echo ($vo["name"]); ?>
-                                       </option><?php endforeach; endif; else: echo "" ;endif; ?>
+                                <select name="search-sort" id="">
+                                    <option value="">全部</option>
+                                    <option value="19">精品界面</option><option value="20">推荐界面</option>
                                 </select>
                             </td>
                             <th width="70">关键字:</th>
-                            <td><input class="common-text" placeholder="关键字" name="kw" value="<?php echo ($kw); ?>" id="" type="text"></td>
+                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="查询" type="submit"></td>
                         </tr>
                     </table>
@@ -88,42 +86,35 @@
             </div>
         </div>
         <div class="result-wrap">
-            <form   id="myform" method="post">
+            <form name="myform"  id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="/index.php/Admin/Article/add" class="btn btn-primary btn2"><i class="icon-font"></i>新增文章</a>
-                        <a id="batchDel" ><i class="icon-font" ></i><input formaction="/index.php/Admin/Article/bdel"  class="btn btn-primary btn2" type="submit" value="批量删除"></a>
+                        <a href="/index.php/Admin/Link/add" class="btn btn-primary btn2"><i class="icon-font"></i>新增链接</a>
+                        <a id="batchDel" ><i class="icon-font" ></i><input formaction="/index.php/Admin/Link/bdel"  class="btn btn-primary btn2" type="submit" value="批量删除"></a>
+                        <a id="batchDel" ><i class="icon-font" ></i><input formaction="/index.php/Admin/Link/cateSort"  class="btn btn-primary btn2" type="submit" value="更新排序"></a>
                     </div>
                 </div>
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>
                             <th class="tc" width="5%"><input class="allChoose" id="check"  type="checkbox" ></th>
+                            <th>排序</th>
                             <th>ID</th>
-                            <th>文章标题</th>
-                            <th>是否推荐</th>
-                            <th>缩略图</th>
-                            <th>所属栏目</th>
+                            <th>链接名称</th>
+                            <th>链接地址</th>
                             <th>操作</th>
                         </tr>
-                        <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+                        <?php if(is_array($link)): $i = 0; $__LIST__ = $link;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
                                 <td class="tc"><input name="ids[]" class='check' value="<?php echo ($vo["id"]); ?>" type="checkbox"></td>
+                                <td>
+                                    <input class="common-input sort-input" name="<?php echo ($vo["id"]); ?>" value="<?php echo ($vo["sort"]); ?>" type="text">
+                                </td>
                                 <td><?php echo ($vo["id"]); ?></td>
-                                <td title="发哥经典"><a target="_blank" href="#" title="发哥经典"><?php echo ($vo["title"]); ?></a>
-                                </td>
+                                <td><?php echo ($vo["title"]); ?></td>
+                                <td><?php echo ($vo["url"]); ?></td>
                                 <td>
-                                <?php if($vo['rem'] == 1): ?>推荐
-                                <?php else: ?>
-                                未推荐<?php endif; ?>
-                                </td>
-                                <td>
-                                <?php if($vo['pic'] != ''): ?><img src="/<?php echo ($vo["pic"]); ?>" alt="" width="60px"></td>
-                                <?php else: ?>
-                                暂无缩略图<?php endif; ?>
-                                <td><?php echo ($vo["name"]); ?></td>
-                                <td>
-                                    <a class="link-update" href="/index.php/Admin/Article/edit/id/<?php echo ($vo["id"]); ?>">修改</a>
-                                    <a class="link-del" href="/index.php/Admin/Article/del/id/<?php echo ($vo["id"]); ?>" onclick="return confirm('确定要删除文章吗？')">删除</a>
+                                    <a class="link-update" href="/index.php/Admin/Link/edit/id/<?php echo ($vo["id"]); ?>">修改</a>
+                                    <a class="link-del" href="/index.php/Admin/Link/del/id/<?php echo ($vo["id"]); ?>" onclick="return confirm('确定要删除该链接吗？')">删除</a>
                                 </td>
                             </tr><?php endforeach; endif; else: echo "" ;endif; ?>
                     </table>

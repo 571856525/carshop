@@ -5,15 +5,36 @@ class ArticleController extends Controller {
     public function lst()
     {   
     	  $article=D('ArticleView');
-        $count      = $article->count();// 查询满足要求的总记录数
-        $Page       = new \Think\Page($count,3);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        //关键字查询
+        // $where=1;
+        if($kw=I('kw')){
+           $where['title']=array('like',"%".trim($kw)."%");
+           $where1['kw']=I('kw');
+            // $where.=' and title like '.'"%'.$kw.'%" ';
+        }
+        if($cateid=I('cateid')){
+            $where['cateid']=array('eq',$cateid);
+            $where1['cateid']=I('cateid');
+           // $where.=' and cateid = '.$cateid;
+        }
+        $count      = $article->where($where)->count();// 查询满足要求的总记录数
+        $Page       = new \Think\Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        foreach($where1 as $key=>$val) {    
+             $Page->parameter[$key]=$val;
+        }
+        // $sql=$article->getLastSql();
+        // echo $sql;
         $Page->setConfig('prev','上一页');
         $Page->setConfig('next','下一页');
-        $Page->setConfig('last','尾页');
         $show       = $Page->show();// 分页显示输出// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
-        $list = $article->limit($Page->firstRow.','.$Page->listRows)->select();
+        $list = $article->where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
+        $cate=D('cate');
+        $cates=$cate->catetree();
+        $this->assign('cates',$cates);
         $this->assign('list',$list);// 赋值数据集
-        $this->assign('page',$show);// 赋值分页输出
+        $this->assign('page',$show);// 赋值分页输出        
+        $this->assign('kw',$kw);
+        $this->assign('cateid',$cateid);
         $this->display();
     }
     public function add()
